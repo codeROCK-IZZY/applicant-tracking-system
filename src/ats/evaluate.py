@@ -9,7 +9,8 @@ Three banks of simulated companies, never mixed:
 
 Every process sees the same candidates, interviewers and random draws. Quality is the true job performance of the
 people hired (in standard deviations of the applicant pool); fairness is the four-fifths rule: group B's hire rate
-divided by group A's, where below 0.8 is evidence of adverse impact.
+divided by group A's. The four-fifths rule works in both directions: the lower rate over the higher below 0.8 is
+evidence of adverse impact against either group.
 """
 
 from __future__ import annotations
@@ -23,7 +24,7 @@ from typing import Any
 import numpy as np
 
 from .calibrate import audit, leniency
-from .process import LABELS, PROCESSES, history_ratings, run, summary
+from .process import LABELS, PROCESSES, four_fifths, history_ratings, run, summary
 from .world import SHIFTED, Company, Shape, make_company
 
 BANKS: dict[str, tuple[tuple[int, ...], Shape]] = {
@@ -92,7 +93,7 @@ def run_bank(seeds: Sequence[int], shape: Shape, prior: float, gap: float, t: fl
             "best_applicant_hired": float(np.mean([r["best_applicant_hired"] for r in rs])),
             "impact_ratio": rate_b / rate_a if rate_a else 0.0,
             "screen_impact_ratio": float(np.mean([r["screen_impact_ratio"] for r in rs])),
-            "companies_below_four_fifths": sum(r["impact_ratio"] < 0.8 for r in rs),
+            "companies_below_four_fifths": sum(four_fifths(r["impact_ratio"]) < 0.8 for r in rs),
             "share_b_hired": float(np.mean([r["share_b_hired"] for r in rs])),
         }
     unbiased = counts["interviewers"] - counts["biased"]
@@ -153,13 +154,13 @@ def check_gate(r: dict[str, Any]) -> dict[str, Any]:
     hp, sp = h["processes"], s["processes"]
     checks = {
         "heldout_calibrated_over_gut_min": hp["calibrated"]["hire_performance"] - hp["gut"]["hire_performance"],
-        "heldout_fair_impact_ratio_min": hp["audited"]["impact_ratio"],
+        "heldout_fair_impact_ratio_min": four_fifths(hp["audited"]["impact_ratio"]),
         "heldout_fair_not_worse_than_structured": hp["audited"]["hire_performance"]
         - hp["structured"]["hire_performance"],
         "heldout_audit_recall_min": h["audit"]["recall"],
         "heldout_audit_false_flag_rate_max": h["audit"]["false_flag_rate"],
         "shifted_calibrated_over_gut_min": sp["calibrated"]["hire_performance"] - sp["gut"]["hire_performance"],
-        "shifted_fair_impact_ratio_min": sp["audited"]["impact_ratio"],
+        "shifted_fair_impact_ratio_min": four_fifths(sp["audited"]["impact_ratio"]),
     }
     passed = {k: (v <= GATE[k] if k.endswith("_max") else v >= GATE[k]) for k, v in checks.items()}
     return {

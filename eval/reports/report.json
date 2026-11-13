@@ -1,0 +1,328 @@
+{
+  "tuning": {
+    "priors": [
+      {
+        "prior": 0.0,
+        "hire_performance": 0.9281104872978686
+      },
+      {
+        "prior": 2.0,
+        "hire_performance": 0.9334402012813096
+      },
+      {
+        "prior": 5.0,
+        "hire_performance": 0.9349522414377978
+      },
+      {
+        "prior": 10.0,
+        "hire_performance": 0.9287993344136067
+      },
+      {
+        "prior": 20.0,
+        "hire_performance": 0.9258116198908009
+      }
+    ],
+    "prior": 5.0,
+    "audits": [
+      {
+        "min_gap": 0.2,
+        "min_t": 2.0,
+        "recall": 0.9230769230769231,
+        "false_flag_rate": 0.07042253521126761
+      },
+      {
+        "min_gap": 0.2,
+        "min_t": 2.5,
+        "recall": 0.6923076923076923,
+        "false_flag_rate": 0.0
+      },
+      {
+        "min_gap": 0.2,
+        "min_t": 3.0,
+        "recall": 0.6923076923076923,
+        "false_flag_rate": 0.0
+      },
+      {
+        "min_gap": 0.3,
+        "min_t": 2.0,
+        "recall": 0.9230769230769231,
+        "false_flag_rate": 0.04225352112676056
+      },
+      {
+        "min_gap": 0.3,
+        "min_t": 2.5,
+        "recall": 0.6923076923076923,
+        "false_flag_rate": 0.0
+      },
+      {
+        "min_gap": 0.3,
+        "min_t": 3.0,
+        "recall": 0.6923076923076923,
+        "false_flag_rate": 0.0
+      },
+      {
+        "min_gap": 0.4,
+        "min_t": 2.0,
+        "recall": 0.7692307692307693,
+        "false_flag_rate": 0.0
+      },
+      {
+        "min_gap": 0.4,
+        "min_t": 2.5,
+        "recall": 0.6923076923076923,
+        "false_flag_rate": 0.0
+      },
+      {
+        "min_gap": 0.4,
+        "min_t": 3.0,
+        "recall": 0.6923076923076923,
+        "false_flag_rate": 0.0
+      }
+    ],
+    "min_gap": 0.4,
+    "min_t": 2.0
+  },
+  "banks": {
+    "tuning": {
+      "companies": 6,
+      "processes": {
+        "gut": {
+          "label": "One interviewer's overall impression",
+          "hires": 360,
+          "hire_performance": 0.6931269852901867,
+          "hires_top_decile": 0.4361111111111111,
+          "best_applicant_hired": 0.2722222222222222,
+          "impact_ratio": 0.6530440528211644,
+          "screen_impact_ratio": 0.8159536059375246,
+          "companies_below_four_fifths": 4,
+          "share_b_hired": 0.3027777777777778
+        },
+        "discussion": {
+          "label": "Panel of three, open debrief",
+          "hires": 360,
+          "hire_performance": 0.7679375430469845,
+          "hires_top_decile": 0.49722222222222223,
+          "best_applicant_hired": 0.26666666666666666,
+          "impact_ratio": 0.5380568783659261,
+          "screen_impact_ratio": 0.7435169880467524,
+          "companies_below_four_fifths": 5,
+          "share_b_hired": 0.2638888888888889
+        },
+        "structured": {
+          "label": "Panel of three, independent rubric scores",
+          "hires": 360,
+          "hire_performance": 0.835972351065995,
+          "hires_top_decile": 0.5472222222222222,
+          "best_applicant_hired": 0.3666666666666667,
+          "impact_ratio": 0.4789306704712796,
+          "screen_impact_ratio": 0.7435169880467524,
+          "companies_below_four_fifths": 6,
+          "share_b_hired": 0.2416666666666666
+        },
+        "calibrated": {
+          "label": "Rubric scores, interviewer leniency taken out",
+          "hires": 360,
+          "hire_performance": 0.9349522414377978,
+          "hires_top_decile": 0.6361111111111112,
+          "best_applicant_hired": 0.4222222222222222,
+          "impact_ratio": 0.5942656375791734,
+          "screen_impact_ratio": 0.7435169880467524,
+          "companies_below_four_fifths": 6,
+          "share_b_hired": 0.28333333333333327
+        },
+        "audited": {
+          "label": "Calibrated + school hidden + flagged interviewers off panels",
+          "hires": 360,
+          "hire_performance": 0.9585467519721999,
+          "hires_top_decile": 0.6638888888888889,
+          "best_applicant_hired": 0.4388888888888889,
+          "impact_ratio": 0.8499297448604748,
+          "screen_impact_ratio": 0.9405176473509412,
+          "companies_below_four_fifths": 5,
+          "share_b_hired": 0.3611111111111111
+        }
+      },
+      "audit": {
+        "interviewers": 84,
+        "biased": 13,
+        "found": 10,
+        "false_flags": 0,
+        "recall": 0.7692307692307693,
+        "false_flag_rate": 0.0
+      },
+      "leniency_correlation": 0.9759833618497695,
+      "applicants": 10800
+    },
+    "heldout": {
+      "companies": 15,
+      "processes": {
+        "gut": {
+          "label": "One interviewer's overall impression",
+          "hires": 900,
+          "hire_performance": 0.6529919227264992,
+          "hires_top_decile": 0.4,
+          "best_applicant_hired": 0.21333333333333332,
+          "impact_ratio": 0.6725789583498444,
+          "screen_impact_ratio": 0.83708805110203,
+          "companies_below_four_fifths": 12,
+          "share_b_hired": 0.3100000000000001
+        },
+        "discussion": {
+          "label": "Panel of three, open debrief",
+          "hires": 900,
+          "hire_performance": 0.7497240149185629,
+          "hires_top_decile": 0.4855555555555556,
+          "best_applicant_hired": 0.2911111111111111,
+          "impact_ratio": 0.6046826724684635,
+          "screen_impact_ratio": 0.8656060246139835,
+          "companies_below_four_fifths": 12,
+          "share_b_hired": 0.28777777777777774
+        },
+        "structured": {
+          "label": "Panel of three, independent rubric scores",
+          "hires": 900,
+          "hire_performance": 0.7960941516477459,
+          "hires_top_decile": 0.5155555555555555,
+          "best_applicant_hired": 0.3288888888888889,
+          "impact_ratio": 0.5846182243637918,
+          "screen_impact_ratio": 0.8656060246139835,
+          "companies_below_four_fifths": 11,
+          "share_b_hired": 0.28111111111111114
+        },
+        "calibrated": {
+          "label": "Rubric scores, interviewer leniency taken out",
+          "hires": 900,
+          "hire_performance": 0.8789610247475185,
+          "hires_top_decile": 0.5922222222222223,
+          "best_applicant_hired": 0.38,
+          "impact_ratio": 0.5337116893302122,
+          "screen_impact_ratio": 0.8656060246139835,
+          "companies_below_four_fifths": 15,
+          "share_b_hired": 0.2633333333333333
+        },
+        "audited": {
+          "label": "Calibrated + school hidden + flagged interviewers off panels",
+          "hires": 900,
+          "hire_performance": 0.914579875219289,
+          "hires_top_decile": 0.6277777777777777,
+          "best_applicant_hired": 0.41111111111111115,
+          "impact_ratio": 0.9709536054825627,
+          "screen_impact_ratio": 1.0341761271632712,
+          "companies_below_four_fifths": 9,
+          "share_b_hired": 0.3933333333333334
+        }
+      },
+      "audit": {
+        "interviewers": 210,
+        "biased": 53,
+        "found": 37,
+        "false_flags": 1,
+        "recall": 0.6981132075471698,
+        "false_flag_rate": 0.006369426751592357
+      },
+      "leniency_correlation": 0.9596695265687454,
+      "applicants": 27000
+    },
+    "shifted": {
+      "companies": 8,
+      "processes": {
+        "gut": {
+          "label": "One interviewer's overall impression",
+          "hires": 480,
+          "hire_performance": 0.6019701545663907,
+          "hires_top_decile": 0.36458333333333337,
+          "best_applicant_hired": 0.2125,
+          "impact_ratio": 0.49222622992322596,
+          "screen_impact_ratio": 0.8421486395210624,
+          "companies_below_four_fifths": 6,
+          "share_b_hired": 0.24791666666666667
+        },
+        "discussion": {
+          "label": "Panel of three, open debrief",
+          "hires": 480,
+          "hire_performance": 0.70759306590361,
+          "hires_top_decile": 0.45,
+          "best_applicant_hired": 0.2708333333333333,
+          "impact_ratio": 0.4643437718952093,
+          "screen_impact_ratio": 0.7837577844843354,
+          "companies_below_four_fifths": 8,
+          "share_b_hired": 0.2375
+        },
+        "structured": {
+          "label": "Panel of three, independent rubric scores",
+          "hires": 480,
+          "hire_performance": 0.7466106705233145,
+          "hires_top_decile": 0.46875,
+          "best_applicant_hired": 0.27083333333333337,
+          "impact_ratio": 0.429306730777421,
+          "screen_impact_ratio": 0.7837577844843354,
+          "companies_below_four_fifths": 6,
+          "share_b_hired": 0.22291666666666665
+        },
+        "calibrated": {
+          "label": "Rubric scores, interviewer leniency taken out",
+          "hires": 480,
+          "hire_performance": 0.8865876785775688,
+          "hires_top_decile": 0.5895833333333333,
+          "best_applicant_hired": 0.4125,
+          "impact_ratio": 0.3890042024660121,
+          "screen_impact_ratio": 0.7837577844843354,
+          "companies_below_four_fifths": 7,
+          "share_b_hired": 0.20625
+        },
+        "audited": {
+          "label": "Calibrated + school hidden + flagged interviewers off panels",
+          "hires": 480,
+          "hire_performance": 0.9178397649025876,
+          "hires_top_decile": 0.6104166666666666,
+          "best_applicant_hired": 0.4083333333333333,
+          "impact_ratio": 0.7962929305855027,
+          "screen_impact_ratio": 0.9624420070441866,
+          "companies_below_four_fifths": 6,
+          "share_b_hired": 0.34791666666666665
+        }
+      },
+      "audit": {
+        "interviewers": 160,
+        "biased": 66,
+        "found": 27,
+        "false_flags": 0,
+        "recall": 0.4090909090909091,
+        "false_flag_rate": 0.0
+      },
+      "leniency_correlation": 0.9512348560678339,
+      "applicants": 14400
+    }
+  },
+  "seconds": 66.9,
+  "gate": {
+    "passed": true,
+    "checks": {
+      "heldout_calibrated_over_gut_min": 0.226,
+      "heldout_fair_impact_ratio_min": 0.971,
+      "heldout_fair_not_worse_than_structured": 0.1185,
+      "heldout_audit_recall_min": 0.6981,
+      "heldout_audit_false_flag_rate_max": 0.0064,
+      "shifted_calibrated_over_gut_min": 0.2846,
+      "shifted_fair_impact_ratio_min": 0.7963
+    },
+    "ok": {
+      "heldout_calibrated_over_gut_min": true,
+      "heldout_fair_impact_ratio_min": true,
+      "heldout_fair_not_worse_than_structured": true,
+      "heldout_audit_recall_min": true,
+      "heldout_audit_false_flag_rate_max": true,
+      "shifted_calibrated_over_gut_min": true,
+      "shifted_fair_impact_ratio_min": true
+    },
+    "limits": {
+      "heldout_calibrated_over_gut_min": 0.15,
+      "heldout_fair_impact_ratio_min": 0.8,
+      "heldout_fair_not_worse_than_structured": 0.0,
+      "heldout_audit_recall_min": 0.5,
+      "heldout_audit_false_flag_rate_max": 0.05,
+      "shifted_calibrated_over_gut_min": 0.1,
+      "shifted_fair_impact_ratio_min": 0.75
+    }
+  }
+}

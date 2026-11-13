@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: "Python ${{ matrix.python }}: lint, types, tests"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - name: Lint and format
+        run: |
+          ruff check .
+          ruff format --check .
+      - name: Type-check (strict)
+        run: mypy
+      - name: Tests (the blind résumé screen runs through the real SDK against canned API responses)
+        run: pytest
+
+  evaluation:
+    name: Hiring processes on held-out and shifted companies (gate)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - run: ats evaluate --gate --out "$RUNNER_TEMP/eval"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evaluation-report
+          path: ${{ runner.temp }}/eval
+
+  container:
+    name: Container serves the hiring console
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t ats .
+      - name: Health check, the blind screen through the API, requisitions and the interviewer audit
+        run: |
+          docker run -d --name ats -p 8000:8000 ats
+          for _ in $(seq 1 90); do curl -fs http://127.0.0.1:8000/healthz && break; sleep 2; done
+          curl -fs -X POST -H "Content-Type: application/json" -d '{"resume":"Ana Example\nLed a team and designed a Python service"}' http://127.0.0.1:8000/api/screen | grep -q '"name line"'
+          curl -fs http://127.0.0.1:8000/ | grep -q "Requisitions"
+          curl -fs http://127.0.0.1:8000/interviewers | grep -q "Own-group gap"
+
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: gitleaks
+        run: docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:latest git /repo --no-banner

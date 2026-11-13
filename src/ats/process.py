@@ -103,6 +103,13 @@ def run(company: Company, process: str, seed: int, leniency: dict[int, float], e
     return [run_req(r, company, process, g, leniency, excluded) for r in company.reqs if not r.history]
 
 
+def four_fifths(ratio: float) -> float:
+    """The four-fifths rule in both directions: the lower group's rate over the higher group's."""
+    if ratio <= 0:
+        return 0.0
+    return min(ratio, 1 / ratio)
+
+
 def summary(outcomes: Sequence[Outcome]) -> dict[str, float]:
     hired = [c for o in outcomes for c in o.hired]
     apps = [c for o in outcomes for c in o.applicants]
@@ -127,6 +134,8 @@ def summary(outcomes: Sequence[Outcome]) -> dict[str, float]:
         "hire_rate_b": rb,
         "impact_ratio": rb / ra if ra else 0.0,
         "screen_impact_ratio": sb / sa if sa else 0.0,
+        "hired_a": float(sum(c.group == "A" for c in hired)),
+        "hired_b": float(sum(c.group == "B" for c in hired)),
         "share_b_hired": float(np.mean([c.group == "B" for c in hired])),
         "share_b_applied": float(np.mean([c.group == "B" for c in apps])),
     }
